@@ -1,5 +1,8 @@
 import { useState } from "react";
 import "./App.css";
+import minusIcon from "./assets/images/icon-decrement-quantity.svg";
+import plusIcon from "./assets/images/icon-increment-quantity.svg";
+import carbonIcon from "./assets/images/icon-carbon-neutral.svg";
 
 const products = [
   {
@@ -104,6 +107,9 @@ function App() {
         .filter((item) => item.quantity > 0),
     );
   };
+  const removeItem = (id) => {
+    setCart(cart.filter((item) => item.id !== id));
+  };
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
@@ -125,19 +131,19 @@ function App() {
                   {cartItem ? (
                     <div className="quantity-btn">
                       <button
-                        className="qty-btn"
+                        className="icon-btn"
                         onClick={() => decreaseQty(product.id)}
                       >
-                        -
+                        <img src={minusIcon} alt="Decrease quantity" />
                       </button>
 
                       <span>{cartItem.quantity}</span>
 
                       <button
-                        className="qty-btn"
+                        className="icon-btn"
                         onClick={() => increaseQty(product.id)}
                       >
-                        +
+                        <img src={plusIcon} alt="Increase quantity" />
                       </button>
                     </div>
                   ) : (
@@ -180,28 +186,52 @@ function App() {
           </div>
         ) : (
           <>
-            <div className="cart-items">
-              {cart.map((item) => (
-                <div className="cart-item" key={item.id}>
-                  <div>
-                    <h4>{item.name}</h4>
+            {cart.map((item) => (
+              <div className="cart-item" key={item.id}>
+                <div className="cart-left">
+                  <h4>{item.name}</h4>
 
-                    <p>
-                      {item.quantity} × ${item.price.toFixed(2)}
-                    </p>
+                  <div className="cart-details">
+                    <span className="cart-qty">{item.quantity}x</span>
+
+                    <span className="cart-unit">
+                      @ ${item.price.toFixed(2)}
+                    </span>
+
+                    <span className="cart-price">
+                      ${(item.quantity * item.price).toFixed(2)}
+                    </span>
                   </div>
-
-                  <strong>${(item.quantity * item.price).toFixed(2)}</strong>
                 </div>
-              ))}
-            </div>
+
+                <button
+                  className="remove-btn"
+                  onClick={() => removeItem(item.id)}
+                  aria-label="Remove item"
+                >
+                  <img src="src/assets/images/icon-remove-item.svg" alt="" />
+                </button>
+              </div>
+            ))}
 
             <div className="cart-total">
               <span>Order Total</span>
               <strong>${total.toFixed(2)}</strong>
             </div>
 
-            <button onClick={() => setShowModal(true)}>Confirm Order</button>
+            <div className="carbon-delivery">
+              <img
+                src="src/assets/images/icon-carbon-neutral.svg"
+                alt="Carbon Neutral"
+              />
+              <p>
+                This is a <strong>carbon-neutral</strong> delivery
+              </p>
+            </div>
+
+            <button className="confirm-btn" onClick={() => setShowModal(true)}>
+              Confirm Order
+            </button>
           </>
         )}
       </aside>
@@ -246,7 +276,6 @@ function App() {
 
               <div className="summary-total">
                 <span>Order Total</span>
-
                 <strong>${total.toFixed(2)}</strong>
               </div>
             </div>
