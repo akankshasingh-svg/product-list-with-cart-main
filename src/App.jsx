@@ -10,63 +10,108 @@ const products = [
     category: "Waffle",
     name: "Waffle with Berries",
     price: 6.5,
-    image: "src/assets/images/image-waffle-desktop.jpg",
+    image: {
+      thumbnail: "src/assets/images/image-waffle-thumbnail.jpg",
+      mobile: "src/assets/images/image-waffle-mobile.jpg",
+      tablet: "src/assets/images/image-waffle-tablet.jpg",
+      desktop: "src/assets/images/image-waffle-desktop.jpg",
+    },
   },
   {
     id: 2,
     category: "Tiramisu",
     name: "Classic Tiramisu",
     price: 5.5,
-    image: "src/assets/images/image-tiramisu-desktop.jpg",
+    image: {
+      thumbnail: "src/assets/images/image-tiramisu-thumbnail.jpg",
+      mobile: "src/assets/images/image-tiramisu-mobile.jpg",
+      tablet: "src/assets/images/image-tiramisu-tablet.jpg",
+      desktop: "src/assets/images/image-tiramisu-desktop.jpg",
+    },
   },
   {
     id: 3,
     category: "Panna Cotta",
     name: "Vanilla Panna Cotta",
     price: 6.5,
-    image: "src/assets/images/image-panna-cotta-desktop.jpg",
+    image: {
+      thumbnail: "src/assets/images/image-panna-cotta-thumbnail.jpg",
+      mobile: "src/assets/images/image-panna-cotta-mobile.jpg",
+      tablet: "src/assets/images/image-panna-cotta-tablet.jpg",
+      desktop: "src/assets/images/image-panna-cotta-desktop.jpg",
+    },
   },
   {
     id: 4,
     category: "Pie",
     name: "Lemon Meringue Pie",
     price: 5.0,
-    image: "src/assets/images/image-panna-cotta-desktop.jpg",
+    image: {
+      thumbnail: "src/assets/images/image-meringue-thumbnail.jpg",
+      mobile: "src/assets/images/image-meringue-mobile.jpg",
+      tablet: "src/assets/images/image-meringue-tablet.jpg",
+      desktop: "src/assets/images/image-meringue-desktop.jpg",
+    },
   },
   {
     id: 5,
     category: "Macaron",
     name: "Macaron Mix of Five",
     price: 8.0,
-    image: "src/assets/images/image-macaron-desktop.jpg",
+    image: {
+      thumbnail: "src/assets/images/image-macaron-thumbnail.jpg",
+      mobile: "src/assets/images/image-macaron-mobile.jpg",
+      tablet: "src/assets/images/image-macaron-tablet.jpg",
+      desktop: "src/assets/images/image-macaron-desktop.jpg",
+    },
   },
   {
     id: 6,
-    category: "Creme Brulee",
-    name: "Vanilla Bean Creme Brulee",
+    category: "Crème Brûlée",
+    name: "Vanilla Bean Crème Brûlée",
     price: 7.0,
-    image: "src/assets/images/image-creme-brulee-desktop.jpg",
+    image: {
+      thumbnail: "src/assets/images/image-creme-brulee-thumbnail.jpg",
+      mobile: "src/assets/images/image-creme-brulee-mobile.jpg",
+      tablet: "src/assets/images/image-creme-brulee-tablet.jpg",
+      desktop: "src/assets/images/image-creme-brulee-desktop.jpg",
+    },
   },
   {
     id: 7,
     category: "Cake",
     name: "Red Velvet Cake",
     price: 4.5,
-    image: "src/assets/images/image-cake-desktop.jpg",
+    image: {
+      thumbnail: "src/assets/images/image-cake-thumbnail.jpg",
+      mobile: "src/assets/images/image-cake-mobile.jpg",
+      tablet: "src/assets/images/image-cake-tablet.jpg",
+      desktop: "src/assets/images/image-cake-desktop.jpg",
+    },
   },
   {
     id: 8,
     category: "Brownie",
     name: "Salted Caramel Brownie",
     price: 5.5,
-    image: "src/assets/images/image-brownie-desktop.jpg",
+    image: {
+      thumbnail: "src/assets/images/image-brownie-thumbnail.jpg",
+      mobile: "src/assets/images/image-brownie-mobile.jpg",
+      tablet: "src/assets/images/image-brownie-tablet.jpg",
+      desktop: "src/assets/images/image-brownie-desktop.jpg",
+    },
   },
   {
     id: 9,
     category: "Baklava",
     name: "Pistachio Baklava",
     price: 4.0,
-    image: "src/assets/images/image-baklava-desktop.jpg",
+    image: {
+      thumbnail: "src/assets/images/image-baklava-thumbnail.jpg",
+      mobile: "src/assets/images/image-baklava-mobile.jpg",
+      tablet: "src/assets/images/image-baklava-tablet.jpg",
+      desktop: "src/assets/images/image-baklava-desktop.jpg",
+    },
   },
 ];
 
@@ -126,7 +171,26 @@ function App() {
             return (
               <article className="card" key={product.id}>
                 <div className="image-wrapper">
-                  <img src={product.image} alt={product.name} />
+                  <picture>
+                    {/* Mobile */}
+                    <source
+                      media="(max-width: 767px)"
+                      srcSet={product.image.mobile}
+                    />
+
+                    {/* Tablet */}
+                    <source
+                      media="(max-width: 1023px)"
+                      srcSet={product.image.tablet}
+                    />
+
+                    {/* Desktop (default) */}
+                    <img
+                      src={product.image.desktop}
+                      alt={product.name}
+                      className="product-image"
+                    />
+                  </picture>
 
                   {cartItem ? (
                     <div className="quantity-btn">
@@ -252,7 +316,7 @@ function App() {
                 <div className="summary-item" key={item.id}>
                   <div className="summary-left">
                     <img
-                      src={item.image}
+                      src={item.image.thumbnail}
                       alt={item.name}
                       className="summary-img"
                     />
