@@ -214,13 +214,13 @@ function App() {
         <h1>Desserts</h1>
 
         <div className="product-grid">
-          {products.map((product) => {
-            const cartItem = cart.find((item) => item.id === product.id);
+          {products.map((Product) => {
+            const cartItem = cart.find((item) => item.id === Product.id);
 
             return (
               <Card
-                key={product.id}
-                product={product}
+                key={Product.id}
+                product={Product}
                 cartItem={cartItem}
                 addToCart={addToCart}
                 increaseQty={increaseQty}

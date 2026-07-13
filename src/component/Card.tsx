@@ -1,10 +1,24 @@
 import plusIcon from "../assets/images/icon-increment-quantity.svg";
 import minusIcon from "../assets/images/icon-decrement-quantity.svg";
+export type Product = {
+  id: number;
+  category: string;
+  name: string;
+  price: number;
+  image: {
+    desktop: string;
+    tablet: string;
+    mobile: string;
+  };
+};
+export type CartItem = Product & {
+  quantity: number;
+};
 
 type CardProps = {
-  product: any;
-  cartItem: any;
-  addToCart: (product: any) => void;
+  product: Product;
+  cartItem: CartItem;
+  addToCart: (product: Product) => void;
   increaseQty: (id: number) => void;
   decreaseQty: (id: number) => void;
 };
