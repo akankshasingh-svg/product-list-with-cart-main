@@ -1,8 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import minusIcon from "./assets/images/icon-decrement-quantity.svg";
-import plusIcon from "./assets/images/icon-increment-quantity.svg";
-import carbonIcon from "./assets/images/icon-carbon-neutral.svg";
+import Card from "./component/Card";
 import waffleThumbnail from "./assets/images/image-waffle-thumbnail.jpg";
 import waffleMobile from "./assets/images/image-waffle-mobile.jpg";
 import waffleTablet from "./assets/images/image-waffle-tablet.jpg";
@@ -220,59 +218,14 @@ function App() {
             const cartItem = cart.find((item) => item.id === product.id);
 
             return (
-              <article className="card" key={product.id}>
-                <div className="image-wrapper">
-                  <picture>
-                    <source
-                      media="(min-width:650px)"
-                      srcset={product.image.desktop}
-                    />
-                    <source
-                      media="(min-width:465px)"
-                      srcset={product.image.tablet}
-                    />
-                    <img src={product.image.mobile} className="product-image" />
-                  </picture>
-
-                  {cartItem ? (
-                    <div className="quantity-btn">
-                      <button
-                        className="icon-btn"
-                        onClick={() => decreaseQty(product.id)}
-                      >
-                        <img src={minusIcon} alt="Decrease quantity" />
-                      </button>
-
-                      <span>{cartItem.quantity}</span>
-
-                      <button
-                        className="icon-btn"
-                        onClick={() => increaseQty(product.id)}
-                      >
-                        <img src={plusIcon} alt="Increase quantity" />
-                      </button>
-                    </div>
-                  ) : (
-                    <button
-                      className="add-cart-btn"
-                      onClick={() => addToCart(product)}
-                    >
-                      <img
-                        className="cart-icon"
-                        src="src/assets/images/icon-add-to-cart.svg"
-                        alt="Cart"
-                      />
-                      <span>Add to Cart</span>
-                    </button>
-                  )}
-                </div>
-
-                <div className="product-info">
-                  <p className="category">{product.category}</p>
-                  <h2 className="name">{product.name}</h2>
-                  <p className="price">${product.price.toFixed(2)}</p>
-                </div>
-              </article>
+              <Card
+                key={product.id}
+                product={product}
+                cartItem={cartItem}
+                addToCart={addToCart}
+                increaseQty={increaseQty}
+                decreaseQty={decreaseQty}
+              />
             );
           })}
         </div>
